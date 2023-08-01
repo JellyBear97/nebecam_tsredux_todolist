@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Layout from './components/common/Layout';
+import FormNewTodo from './components/FormNewTodo';
+import TodoList from './components/ItemList';
+import { styled } from 'styled-components';
+import './reset.css';
 
-function App() {
+// export interface Todo {
+//   id: string;
+//   content: string;
+//   isDone: boolean;
+// }
+
+// const initialTodos: Todo[] = [
+//   {
+//     id: 'abc',
+//     content: 'TypeScript 복습하기',
+//     isDone: false,
+//   },
+//   {
+//     id: 'bcd',
+//     content: '물 한잔 마시기',
+//     isDone: true,
+//   },
+// ];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <FormNewTodo />
+      <StMain>
+        <TodoList isDone={false} />
+        <TodoList isDone={true} />
+      </StMain>
+    </Layout>
   );
-}
+};
 
 export default App;
+
+const StMain = styled.main`
+  box-sizing: border-box;
+  width: 1000px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-bottom: 45px;
+`;
