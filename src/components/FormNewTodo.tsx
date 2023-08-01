@@ -1,4 +1,5 @@
 // [ ] 한글키 -> 영어키 : 영어키만 됨
+// ....... 이젠 둘다 안됨....
 
 import React, { useRef, useState } from 'react';
 import { styled } from 'styled-components';
@@ -16,17 +17,15 @@ const FormNewTodo = () => {
   // const [test, setTest] = useState<boolean>(false);
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log('');
-    if (e.code === 'Enter') {
+    if (e.key === 'enter') {
       e.preventDefault();
       if (!title) {
         alert('할 일을 입력해주세요');
         return false;
       }
-      return false;
-      // const memoCurrent = memoRef.current;
-      // if (!memoCurrent) return;
-      // memoCurrent.focus();
+      const memoCurrent = memoRef.current;
+      if (!memoCurrent) return;
+      memoCurrent.focus();
     }
   };
 
@@ -59,7 +58,7 @@ const FormNewTodo = () => {
 
     const titleCurrent = titleRef.current;
     if (!titleCurrent) return;
-    titleCurrent.focus();
+    titleCurrent.focus(); // 해결해주세염 배고파염 ...
   };
   return (
     <StForm onSubmit={e => onSubmitTodoHandler(e)}>
