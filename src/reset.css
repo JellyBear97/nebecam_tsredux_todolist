@@ -67,6 +67,9 @@ table {
   border-spacing: 0;
 }
 
+h3 {
+  font-size: 20px;
+}
 
 /* body {
   position: relative;
