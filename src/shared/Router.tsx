@@ -7,12 +7,12 @@ import Detail from '../pages/Detail';
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Layout>
+      <Layout>
+        <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/" element={<Detail />}></Route>
-        </Layout>
-      </Routes>
+          <Route path="/detail/:id" element={<Detail />}></Route>
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };

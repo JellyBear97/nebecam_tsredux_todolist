@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Item from './Item';
 import { styled } from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,9 @@ type Props = {
 
 const ItemList = ({ isDone }: Props) => {
   const todos = useSelector((state: RootState) => state.todolist);
+
+  const [isOpen, setIsOpen] = useState(-1);
+
   return (
     <StSection>
       <h3>{isDone ? 'Done' : 'Working'}</h3>
@@ -22,8 +25,8 @@ const ItemList = ({ isDone }: Props) => {
         .filter(item => {
           return item.isDone === isDone;
         })
-        .map(item => {
-          return <Item key={item.id} item={item} />;
+        .map((item, index) => {
+          return <Item key={item.id} item={item} index={index} setIsOpen={setIsOpen} isOpen={isOpen} />;
         })}
     </StSection>
   );

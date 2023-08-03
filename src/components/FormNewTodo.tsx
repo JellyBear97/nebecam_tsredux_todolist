@@ -1,6 +1,3 @@
-// [ ] 한글키 -> 영어키 : 영어키만 됨
-// ....... 이젠 둘다 안됨....
-
 import React, { useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import { nanoid } from 'nanoid';
@@ -14,11 +11,11 @@ const FormNewTodo = () => {
   const dispatch = useDispatch();
   const titleRef = useRef<HTMLInputElement>(null);
   const memoRef = useRef<HTMLInputElement>(null);
-  // const [test, setTest] = useState<boolean>(false);
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'enter') {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       e.preventDefault();
+      console.log(e);
       if (!title) {
         alert('할 일을 입력해주세요');
         return false;
@@ -58,21 +55,12 @@ const FormNewTodo = () => {
 
     const titleCurrent = titleRef.current;
     if (!titleCurrent) return;
-    titleCurrent.focus(); // 해결해주세염 배고파염 ...
+    titleCurrent.focus();
   };
   return (
     <StForm onSubmit={e => onSubmitTodoHandler(e)}>
       <input type="text" placeholder="할 일을 작성해주세요" value={title} name="title" onChange={e => onChangeContentHandler(e)} onKeyDown={onKeyPressHandler} ref={titleRef} />
-      <input
-        type="text"
-        placeholder="할 일에 대한 메모를 적어주세요"
-        value={memo}
-        name="memo"
-        onChange={e => onChangeContentHandler(e)}
-        ref={memoRef}
-        // onFocus={() => setTest(true)}
-        // onBlur={() => setTest(false)}
-      />
+      <input type="text" placeholder="할 일에 대한 메모를 적어주세요" value={memo} name="memo" onChange={e => onChangeContentHandler(e)} ref={memoRef} />
       <button type="submit">ADD</button>
     </StForm>
   );

@@ -1,15 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import ItemEditModal from '../ItemEditModal';
+import { RootState } from '../../redux/config/configStore';
+import { useSelector } from 'react-redux';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const isOpenEditModalController = useSelector((state: RootState) => state.editModalController);
+  const navigate = useNavigate();
   return (
     <StWrapper>
+      {isOpenEditModalController && <ItemEditModal />}
       <StHeader>
-        <h1>MY TODOLIST</h1>
+        <h1 onClick={() => navigate('/')}>MY TODOLIST</h1>
       </StHeader>
       <StForChildren>{children}</StForChildren>
       <StFooter>
@@ -43,16 +50,15 @@ const StHeader = styled.header`
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   & > h1 {
+    cursor: pointer;
     color: #819981;
     font-size: 30px;
     font-weight: 700;
   }
+  z-index: 20;
 `;
 
 const StFooter = styled.footer`
-  // * footer가  최하단 위치에 있고, header와 footer사이에 나머지 공간을 다 차지하는 contents가 들어오면 footer는 자동으로 최하단에 위치가 되기 때문에 따로 position:absolute를 주지않는다.
-  // [ ] header랑 footer외에는 position속성을 쓰고 있는 element가 없고, 그러면 footer에 position:absolute 속성을 주었을 때 body기준 최하단에 붙어있어야하는게 맞을텐데 왜 중간에 걸려있지?
-  /* position: absolute; */
   bottom: 0;
 
   box-sizing: border-box;
